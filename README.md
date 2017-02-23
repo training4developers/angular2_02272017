@@ -1,4 +1,4 @@
-# Welcome to Advanced Angular 2 with TDD
+# Welcome to Comprehensive Angular 2
 
 ## Instructor
 
@@ -8,7 +8,7 @@ Eric Greene - [http://t4d.io](http://t4d.io) - [LinkedIn](https://www.linkedin.c
 
 Class:
 
-- Today & Tomorrow: 9am to 5pm
+- Monday through Friday: 9am to 5pm
 
 Breaks:
 
@@ -19,22 +19,13 @@ Breaks:
 
 ## Course Outline
 
-Day 1
+	TypeScript & JavaScript topics will be included as needed into the Angular 2 content
 
-- Quick Assessment
-- Angular 2 Overview
-- Unit Testing Overview
-- TDD Synchronous Code
-- Pipes
-- Services
-- Components
-
-Day 2
-
-- JavaScript Asynchronous Programming Review
-- TDD Asynchronous Code
-- HTTP Services
-- Promises & Observables
+- Day 1 - Introduction to Components, Pipes, Event Handling, Directives & Routing
+- Day 2 - Modules, Form Validation, Custom Validators, Custom Pipes, Service Injection
+- Day 3 - Http Service & REST Services, Observables/Promises, Web Sockets, Advanced Routing
+- Day 4 - Composing Components, Structural and Attribute Directives, Unit Testing
+- Day 5 - Project Day
 
 ## Links
 
@@ -60,7 +51,7 @@ Day 2
 
 ## Overview
 
-This is a simple CRUD (create, read, update & delete) application demonstrating the essentials of Angular 2 including HTTP services, routing, forms, composing components and unit testing. The base project configuration was originally adapted from the [Angular 2 Webpack Starter project](https://angular.io/docs/ts/latest/guide/webpack.html), and has been updated to Webpack 2 with help from this project [Angular Class - Angular 2 Webpack Stater](https://github.com/AngularClass/angular2-webpack-starter).
+This is a simple CRUD (create, read, update & delete) starter project supporting the essentials of Angular 2 including HTTP services, routing, forms, composing components and unit testing. The base project configuration was originally adapted from the [Angular 2 Webpack Starter project](https://angular.io/docs/ts/latest/guide/webpack.html), and has been updated to Webpack 2 with help from this project [Angular Class - Angular 2 Webpack Stater](https://github.com/AngularClass/angular2-webpack-starter).
 
 ## Application Setup
 
