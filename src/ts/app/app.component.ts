@@ -2,8 +2,10 @@ import { Component } from "@angular/core";
 
 @Component({
     selector: "main",
-    template: "<h1>{{message}}</h1>",
+    template: "<h1>{{header}}</h1>",
 })
 export class AppComponent {
-    public message: string = "Hello World!";
+
+    public header: string = "Color Tool!";
+
 }
