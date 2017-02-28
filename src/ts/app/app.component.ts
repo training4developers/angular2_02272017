@@ -24,7 +24,7 @@ import { Component, Pipe, PipeTransform, DoCheck } from "@angular/core";
                 </div>
             </form>
             <ul>
-                <li *ngFor="let color of filteredColors">{{color}}</li>
+                <li *ngFor="let color of filteredColors(colorSort) | slice:startIndex:endIndex">{{color}}</li>
             </ul>
         </div>
         <form>
@@ -45,6 +45,9 @@ export class AppComponent implements DoCheck {
     public newColor: string = "";
     public colorFilter: string = "";
 
+    public startIndex: number = 1;
+    public endIndex: number = 4;
+
     public colors: any[] = [
         "saffron", "green", "white", "red", "gold", "blue",
         "yellow",
@@ -52,27 +55,20 @@ export class AppComponent implements DoCheck {
 
     public lastColors: any[];
 
-    private internalSortedColors: any[];
     private filterCache: Map<string, string[]> =
         new Map<string, string[]>();
 
-    public get filteredColors(): string[] {
+    public filteredColors(sortFn: Function) {
+
         if (!this.filterCache.has(this.colorFilter)) {
-            console.log("did filter");
             this.filterCache.set(this.colorFilter,
-                this.colors.filter((color) => color.startsWith(this.colorFilter)));
+                sortFn(this.colors.filter((color) => color.startsWith(this.colorFilter))));
         }
         return this.filterCache.get(this.colorFilter);
     }
 
-    public get sortedColors() {
-
-        if (this.lastColors !== this.colors) {
-            console.log("do sort");
-            this.lastColors = this.colors;
-            this.internalSortedColors = this.colors.concat().sort();
-        }
-        return this.internalSortedColors;
+    public colorSort(colors: string[]) {
+        return colors.sort();
     }
 
     public addColor() {
