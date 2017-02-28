@@ -3,10 +3,11 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
+import { MyUppercasePipe } from "./pipes/my-uppercase.pipe";
 
 @NgModule({
     imports: [ BrowserModule, FormsModule ],
-    declarations: [ AppComponent ],
+    declarations: [ AppComponent, MyUppercasePipe ],
     bootstrap: [ AppComponent ],
 })
 export class AppModule { }

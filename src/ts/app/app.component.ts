@@ -16,7 +16,7 @@ import { Component, Pipe, PipeTransform, DoCheck } from "@angular/core";
     selector: "main",
     template: `
         <div>
-            <h1>{{header | uppercase}}</h1>
+            <h1>{{header | myUppercase}}</h1>
             <form>
                 <div>
                     <label>Filter:</label>
