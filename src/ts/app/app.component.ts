@@ -17,11 +17,14 @@ import { Component, Pipe, PipeTransform, DoCheck } from "@angular/core";
     template: `
         <div>
             <h1>{{header | uppercase}}</h1>
+            <form>
+                <div>
+                    <label>Filter:</label>
+                    <input type="text" name="colorFilterInput" [(ngModel)]="colorFilter">
+                </div>
+            </form>
             <ul>
-                <li *ngFor="let color of sortedColors">{{color}}</li>
-            </ul>
-            <ul>
-                <li *ngFor="let color of colors">{{color}}</li>
+                <li *ngFor="let color of filteredColors">{{color}}</li>
             </ul>
         </div>
         <form>
@@ -40,6 +43,7 @@ export class AppComponent implements DoCheck {
 
     public header: string = "Color Tool!";
     public newColor: string = "";
+    public colorFilter: string = "";
 
     public colors: any[] = [
         "saffron", "green", "white", "red", "gold", "blue",
@@ -47,7 +51,19 @@ export class AppComponent implements DoCheck {
     ];
 
     public lastColors: any[];
+
     private internalSortedColors: any[];
+    private filterCache: Map<string, string[]> =
+        new Map<string, string[]>();
+
+    public get filteredColors(): string[] {
+        if (!this.filterCache.has(this.colorFilter)) {
+            console.log("did filter");
+            this.filterCache.set(this.colorFilter,
+                this.colors.filter((color) => color.startsWith(this.colorFilter)));
+        }
+        return this.filterCache.get(this.colorFilter);
+    }
 
     public get sortedColors() {
 
@@ -66,10 +82,21 @@ export class AppComponent implements DoCheck {
         this.colors.push(this.newColor);
         console.log(this.colors);
         this.newColor = "";
+        this.filterCache.clear();
     }
 
     public ngDoCheck() {
-        console.log("ran change detection");
+        //console.log("ran change detection");
     }
 
 }
+
+                // this.colors.filter((color) => {
+                //     if (this.colorFilter == null || String(this.colorFilter).length === 0) {
+                //         return true;
+                //     } else {
+                //         return color.startsWith(this.colorFilter);
+                //     }
+
+                // }));
+
