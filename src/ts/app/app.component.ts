@@ -1,16 +1,10 @@
 import { Component, Pipe, PipeTransform, DoCheck } from "@angular/core";
+import { Logger } from "./services/logger.service";
 
-// @Pipe({
-//     name: "demo",
-//     pure: true,
-// })
-// export class DemoPipe implements PipeTransform {
-
-//     public transform(list: string[]) {
-//         console.log("called demo pipe");
-//         return list.sort();
-//     }
-// }
+// const MockLogger = {
+//     log: () => {},
+//     error: () => {},
+// };
 
 @Component({
     selector: "main",
@@ -38,6 +32,7 @@ import { Component, Pipe, PipeTransform, DoCheck } from "@angular/core";
             </button>
         </form>
     `,
+    providers: [ { provide: Logger, useClass: Logger } ],
 })
 export class AppComponent implements DoCheck {
 
@@ -45,8 +40,25 @@ export class AppComponent implements DoCheck {
     public newColor: string = "";
     public colorFilter: string = "";
 
-    public startIndex: number = 1;
-    public endIndex: number = 4;
+    //public startIndex: number = 1;
+    //public endIndex: number = 4;
+
+    public currentPage: number = 0;
+    public pageLength: number = 10;
+
+    // private logger: Logger;
+
+    // constructor(logger: Logger) {
+    //     this.logger = logger;
+    // }
+
+    public get startIndex() {
+        return this.currentPage * this.pageLength;
+    }
+
+    public get endIndex() {
+        return this.startIndex + this.pageLength;
+    }
 
     public colors: any[] = [
         "saffron", "green", "white", "red", "gold", "blue",
@@ -58,9 +70,20 @@ export class AppComponent implements DoCheck {
     private filterCache: Map<string, string[]> =
         new Map<string, string[]>();
 
+    constructor(private logger: Logger) { }
+
+    public nextPage() {
+        this.currentPage++;
+    }
+
+    public prevPage() {
+        this.currentPage--;
+    }
+
     public filteredColors(sortFn: Function) {
 
         if (!this.filterCache.has(this.colorFilter)) {
+            this.logger.log("doing some filtering");
             this.filterCache.set(this.colorFilter,
                 sortFn(this.colors.filter((color) => color.startsWith(this.colorFilter))));
         }
