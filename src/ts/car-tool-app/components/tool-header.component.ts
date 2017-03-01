@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
     selector: "tool-header",
@@ -6,9 +6,8 @@ import { Component, Input } from "@angular/core";
         <h1>{{header}}</h1>
     </header>`,
 })
-export class ToolHeader {
+export class ToolHeader  {
 
     @Input()
     public header: string = "";
-
 }

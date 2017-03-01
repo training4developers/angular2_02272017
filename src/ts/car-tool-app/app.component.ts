@@ -7,26 +7,7 @@ import { Cars } from "./services/cars.service";
     selector: "main",
     template: `
         <tool-header [header]="toolHeader"></tool-header>
-        <table>
-            <thead>
-                <tr>
-                    <th>Make</th>
-                    <th>Model</th>
-                    <th>Year</th>
-                    <th>Color</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let car of cars">
-                    <td>{{car.make}}</td>
-                    <td>{{car.model}}</td>
-                    <td>{{car.year}}</td>
-                    <td>{{car.color}}</td>
-                    <td>{{car.price}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <car-table [cars]="cars"></car-table>
         <car-form (carSubmitted)="addCar($event)"></car-form>
     `,
     providers: [ Cars ],
@@ -36,6 +17,7 @@ export class AppComponent {
     public toolHeader: string = "Car Tool!!";
     public cars: Car[];
     public newCar: Car = {} as Car;
+
 
     public currentPage: number = 0;
     public pageLength: number = 10;
