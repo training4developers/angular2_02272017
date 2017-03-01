@@ -60,6 +60,7 @@ export class AppComponent implements DoCheck {
         return this.startIndex + this.pageLength;
     }
 
+
     public colors: any[] = [
         "saffron", "green", "white", "red", "gold", "blue",
         "yellow",
@@ -70,7 +71,14 @@ export class AppComponent implements DoCheck {
     private filterCache: Map<string, string[]> =
         new Map<string, string[]>();
 
-    constructor(private logger: Logger) { }
+    constructor(
+        private logger: Logger,
+        //private logger2: logger2
+    ) {
+        //this.colors = this.colorsSvc.getAll();
+    }
+
+    //public colors: string[] = this.colorsSvc.getAll();
 
     public nextPage() {
         this.currentPage++;
