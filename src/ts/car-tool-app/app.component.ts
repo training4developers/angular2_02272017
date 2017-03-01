@@ -6,7 +6,7 @@ import { Cars } from "./services/cars.service";
 @Component({
     selector: "main",
     template: `
-        <h1>{{header}}</h1>
+        <tool-header [header]="toolHeader"></tool-header>
         <table>
             <thead>
                 <tr>
@@ -57,7 +57,7 @@ import { Cars } from "./services/cars.service";
 })
 export class AppComponent {
 
-    public header: string = "Car Tool";
+    public toolHeader: string = "Car Tool!!";
     public cars: Car[];
     public newCar: Car = {} as Car;
 
@@ -73,8 +73,14 @@ export class AppComponent {
     }
 
     constructor(private carsSvc: Cars) {
+
+        this.carsSvc.updated(() => {
+            console.log("car svc updated");
+            this.cars = carsSvc.getAll();
+        });
+
         this.cars = carsSvc.getAll();
-    }
+   }
 
     public nextPage() {
         this.currentPage++;
@@ -85,6 +91,7 @@ export class AppComponent {
     }
 
     public addCar() {
-        this.cars = this.cars.concat(this.newCar);
+        this.carsSvc.append(this.newCar);
+        this.newCar = {} as Car;
     }
 }
