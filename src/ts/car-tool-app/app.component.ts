@@ -27,31 +27,7 @@ import { Cars } from "./services/cars.service";
                 </tr>
             </tbody>
         </table>
-        <form>
-            <div>
-                <label for="make-input">Make</label>
-                <input type="text" [(ngModel)]="newCar.make" id="make-input" name="makeInput">
-            </div>
-            <div>
-                <label for="model-input">Model</label>
-                <input type="text" [(ngModel)]="newCar.model" id="model-input" name="modelInput">
-            </div>
-            <div>
-                <label for="year-input">Year</label>
-                <input type="text" [(ngModel)]="newCar.year" id="year-input" name="yearInput">
-            </div>
-            <div>
-                <label for="color-input">Color</label>
-                <input type="text" [(ngModel)]="newCar.color" id="color-input" name="colorInput">
-            </div>
-            <div>
-                <label for="price-input">Price</label>
-                <input type="text" [(ngModel)]="newCar.price" id="price-input" name="priceInput">
-            </div>
-            <button type="button" (click)="addCar()" >
-                Add Car
-            </button>
-        </form>
+        <car-form (carSubmitted)="addCar($event)"></car-form>
     `,
     providers: [ Cars ],
 })
@@ -90,8 +66,7 @@ export class AppComponent {
         this.currentPage--;
     }
 
-    public addCar() {
-        this.carsSvc.append(this.newCar);
-        this.newCar = {} as Car;
+    public addCar(newCar: Car) {
+        this.carsSvc.append(newCar);
     }
 }
