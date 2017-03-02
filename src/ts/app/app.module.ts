@@ -1,18 +1,15 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
+import { HttpModule } from "@angular/http";
 
 import { AppComponent } from "./app.component";
-import { MyUppercasePipe } from "./pipes/my-uppercase.pipe";
-import { MyAppendPipe } from "./pipes/my-append.pipe";
-
-import { Logger } from "./services/logger.service";
-import { Logger2 } from "./services/logger2.service";
+import { Cars } from "./services/cars.service";
 
 @NgModule({
-    imports: [ BrowserModule, FormsModule ],
-    declarations: [ AppComponent, MyUppercasePipe, MyAppendPipe ],
+    imports: [ BrowserModule, FormsModule, HttpModule ],
+    declarations: [ AppComponent ],
     bootstrap: [ AppComponent ],
-    providers: [ { provide: Logger, useClass: Logger2 } ],
+    providers: [ Cars ],
 })
 export class AppModule { }

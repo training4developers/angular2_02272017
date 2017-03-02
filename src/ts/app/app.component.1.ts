@@ -1,7 +1,9 @@
-import { Component, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 import { Car } from "./interfaces/car";
 import { Cars } from "./services/cars.service";
+
+import { Observable, Observer } from "rxjs";
 
 @Component({
     selector: "main",
@@ -20,9 +22,8 @@ import { Cars } from "./services/cars.service";
         <car-form (carSubmitted)="addCar($event)"></car-form>
     `,
     providers: [ Cars ],
-    encapsulation: ViewEncapsulation.Emulated,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
     public toolHeader: string = "Car Tool";
     public cars: Car[];
@@ -37,8 +38,33 @@ export class AppComponent {
         this.cars = carsSvc.getAll();
    }
 
-   public carFilter = (make: string) =>
-        (car: Car) => car.make.startsWith(make);
+   public ngOnInit() {
+
+       const o = Observable.create((observer: Observer<number>) => {
+
+            let counter = 0;
+            const hInterval = window.setInterval(() => {
+                console.log("timeout invoked");
+                observer.next(counter++);
+                if (counter > 5) {
+                    window.clearInterval(hInterval);
+                    observer.complete();
+                }
+           }, 1000);
+
+       });
+
+       // o.map((x: number) => x * 2).subscribe((result: number) => console.log(result));
+       // console.dir(o.toPromise());
+       // o.toPromise().then((result: number) => console.log("result", result));
+
+       o.toPromise()
+        .then((results: any) => console.log("resolve", results))
+        .catch((results: any) => console.log("catch", results));
+
+   }
+
+   public carFilter = (make: string) => (car: Car) => car.make.startsWith(make);
 
     public addCar(newCar: Car) {
         this.carsSvc.append(newCar);

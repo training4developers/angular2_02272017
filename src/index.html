@@ -9,44 +9,75 @@
   </head>
   <body>
     <main>Loading...</main>
+
     <script>
 
-        // function fn2(x) {
-        //     return x ** 2;
+
+        // function getLocation() {
+        //     return new Promise((resolve, reject) => {
+        //         navigator.geolocation.getCurrentPosition(position => {
+        //             resolve(postion);
+        //         });
+        //     })
         // }
 
-        // Array.prototype.myMap = function (mapFn) {
-        //     const mapResults = [];
-        //     for (let x=0; x < this.length; x++) {
-        //         mapResults[x] = mapFn(this[x], x, this);
-        //     }        
-        //     return mapResults;
-        // };
 
-        // Array.prototype.myFilter = function(filterFn) {
-        //     const filterResults = [];
-        //     for (let x=0; x < this.length; x++) {
-        //         if (filterFn(this[x], x, this)) {
-        //             filterResults.push(this[x]);
-        //         }
-        //     }        
-        //     return filterResults;            
-        // };
+        // function getRestaurants(location) {
 
-        // const fn = x => x ** 2;
+        //     return new Promise((resolve, reject) => {
 
-        // console.log([1,2,3,4,5].map(t => t ** 2).filter(t => t > 5));
+        //         const xhr = new XMLHttpRequest();
+        //         xhr.addEventListener("readystatechange", function() {
 
-        // [1,2,3].forEach(item => {
-        //     console.log(item);
+        //             if (xhr.status === 200 && xhr.readyState === 4) {
+        //                 resolve(JSON.parse(xhr.responseText));
+        //             }
+
+        //         });
+
+        //         xhr.open("get", "http://localhost/getrestaurants/"+ location);
+        //         xhr.send();
+
+        //     });
+
+        // }
+
+        // getLocation()
+        //     .then(position => getRestaurants(position))
+        //     .then((results) => console.log(results));
+
+        // var x = document.getElementById("demo");
+        // function getLocation() {
+        //     if (navigator.geolocation) {
+        //         navigator.geolocation.getCurrentPosition(showPosition);
+        //     } else {
+        //         x.innerHTML = "Geolocation is not supported by this browser.";
+        //     }
+        // }
+        // function showPosition(position) {
+        //     x.innerHTML = "Latitude: " + position.coords.latitude + 
+        //     "<br>Longitude: " + position.coords.longitude; 
+        // }
+
+
+        // const p1 = new Promise(resolve => setTimeout(() => resolve('a'), 2000));
+        // const p2 = new Promise(resolve => setTimeout(() => resolve('b'), 4000));
+        // const p3 = new Promise((resolve, reject) => setTimeout(() => reject('c'), 6000));
+        // const p4 = new Promise(resolve => setTimeout(() => resolve('d'), 8000));
+
+        // p1.then(results => console.log(results));
+        // p2.then(results => console.log(results));
+        // p3.then(results => console.log(results))
+        //     .catch(results => console.log('rejected', results));
+        // p4.then(results => console.log(results));
+
+        // Promise.all([p1,p2,p3,p4]).then(results => {
+        //     console.log('all done');
+        //     console.log(results);
+        // }).catch(results => {
+        //     console.log('one failed');
+        //     console.log(results);
         // });
-
-        // function doIt(a,b,...c) {
-        //     console.log(a,b,c);
-        // }
-
-        // doIt(...[1,2,3,4,5]);
-
 
 
     </script>
