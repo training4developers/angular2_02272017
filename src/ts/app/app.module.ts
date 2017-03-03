@@ -3,12 +3,12 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 
-import { AppComponent } from "./app.component";
+import { AppComponent, MyComp } from "./app.component";
 import { Cars } from "./services/cars.service";
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpModule ],
-    declarations: [ AppComponent ],
+    declarations: [ AppComponent, MyComp ],
     bootstrap: [ AppComponent ],
     providers: [ Cars ],
 })

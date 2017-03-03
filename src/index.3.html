@@ -14,29 +14,10 @@
 
         const iframe = document.querySelector("#my-frame");
 
-        iframe.addEventListener("load", function() {
-            //console.info(iframe.contentDocument.title);
-        });
-
         const doc = iframe.contentDocument;
         const win = iframe.contentWindow;
 
-        // win.addEventListener("hashchange", function() {
-        //     console.info("hashchange");
-        // });
-
-        // const s = doc.createElement("script");
-        // //s.innerHTML = "window.location.href = 'http://localhost:4567';";
-        // s.innerHTML = `
-        //     window.location.href = 'http://localhost:5000/images/placeholder.html';
-        // `;
-
-        // doc.open();
-        // doc.appendChild(s);
-        // doc.close();
-
         iframe.src = 'http://localhost:5000/images/placeholder.html2';
-        //iframe.src = 'http://www.cnn.com';
 
         const i = window.setInterval(() => {
             const newDoc = iframe.contentDocument;
