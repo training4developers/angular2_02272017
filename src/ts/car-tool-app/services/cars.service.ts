@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 
-import { Car } from "../../car-tool-app/interfaces/car";
+import { Car } from "../interfaces/car";
 
 @Injectable()
 export class Cars {
@@ -16,12 +16,9 @@ export class Cars {
         { id: 4, make: "Ford", model: "Yaris", color: "red", year: 2005, price: 12000 },
     ];
 
-    constructor(private http: Http) { }
+    public getAll(): Car[] {
 
-    public getAll(): Promise<Car[]> {
-
-        return this.http.get("http://localhost:3010/cars")
-            .toPromise().then((res) => res.json());
+        return this.cars;
     }
 
     public append(car: Car) {

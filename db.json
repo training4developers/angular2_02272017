@@ -55,6 +55,14 @@
       "year": 1990,
       "price": 10000,
       "id": 7
+    },
+    {
+      "make": "Toyota",
+      "model": "Yaris",
+      "color": "blue",
+      "year": 1990,
+      "price": 10000,
+      "id": 8
     }
   ],
   "owners": [

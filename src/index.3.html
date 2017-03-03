@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <base href="/">
+    <title>Welcome to Angular 2!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <main>Loading...</main>
+    <iframe id="my-frame"></iframe>
+    <script>
+
+        const iframe = document.querySelector("#my-frame");
+
+        iframe.addEventListener("load", function() {
+            //console.info(iframe.contentDocument.title);
+        });
+
+        const doc = iframe.contentDocument;
+        const win = iframe.contentWindow;
+
+        // win.addEventListener("hashchange", function() {
+        //     console.info("hashchange");
+        // });
+
+        // const s = doc.createElement("script");
+        // //s.innerHTML = "window.location.href = 'http://localhost:4567';";
+        // s.innerHTML = `
+        //     window.location.href = 'http://localhost:5000/images/placeholder.html';
+        // `;
+
+        // doc.open();
+        // doc.appendChild(s);
+        // doc.close();
+
+        iframe.src = 'http://localhost:5000/images/placeholder.html2';
+        //iframe.src = 'http://www.cnn.com';
+
+        const i = window.setInterval(() => {
+            const newDoc = iframe.contentDocument;
+            if (doc !== newDoc) {
+                if (newDoc.readyState === "complete") {
+                    window.clearInterval(i);
+                    if (newDoc.body == null || String(newDoc.body.innerHTML).includes('Cannot GET')) {
+                        console.log('failed to load');
+                    } else {
+                        console.log('loaded');
+                    }
+                } else {
+                    console.log('loading');
+                }
+            } else {
+                console.log('waiting to load');
+            }
+        }, 10);
+
+        // setTimeout(() => {
+        //     console.info('timeout expired');
+        //     console.info(win.location.href);
+        //     console.dir(iframe.contentDocument);
+        // }, 5000);
+
+
+    </script>
+  </body>
+</html>

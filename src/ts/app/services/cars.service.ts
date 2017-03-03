@@ -1,10 +1,19 @@
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
+import { Http, RequestOptions, Headers } from "@angular/http";
+
+import "rxjs";
+import { Observable } from "rxjs";
 
 import { Car } from "../../car-tool-app/interfaces/car";
 
 @Injectable()
 export class Cars {
+
+    private requestOptions = new RequestOptions({
+        headers: new Headers({
+            "Content-Type": "application/json",
+        }),
+    });
 
     private lastCarId: number = 4;
     private updateFns: Function[] = [];
@@ -18,22 +27,29 @@ export class Cars {
 
     constructor(private http: Http) { }
 
- 
-
-    public refresh(): Promise<Car[]> {
+    public refresh(): Observable<Car[]> {
         return this.http.get("http://localhost:3010/cars")
-            .toPromise().then((res) => res.json())
-            .then((cars) => this.cars = cars);
+            .map((res) => res.json())
+            .map((cars) => {
+                this.cars = cars;
+                this.notifyUpdate();
+                return this.cars;
+            });
     }
 
     public getAll(): Car[] {
         return this.cars;
     }
 
-    public append(car: Car) {
-        car.id = ++this.lastCarId;
-        this.cars = this.cars.concat(car);
-        this.notifyUpdate();
+    public append(car: Car): Promise<Car> {
+
+        return this.http.post("http://localhost:3010/cars", JSON.stringify(car), this.requestOptions)
+            .toPromise()
+            .then((result) => {
+                this.refresh();
+                return car;
+            });
+
     }
 
     public updated(fn: Function) {

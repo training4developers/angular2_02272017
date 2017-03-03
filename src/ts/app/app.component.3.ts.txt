@@ -1,0 +1,52 @@
+import { Component, OnInit } from "@angular/core";
+import { Http, RequestOptions, Headers } from "@angular/http";
+
+import { Car } from "../car-tool-app/interfaces/car";
+import { Cars } from "./services/cars.service";
+
+import { Observable, Observer } from "rxjs";
+
+@Component({
+    selector: "main",
+    template: `
+        Hello World!
+        <ul>
+            <li *ngFor="let car of cars">
+                {{car.make}}
+            </li>
+        </ul>
+    `,
+})
+export class AppComponent implements OnInit {
+
+    private cars: Car[] = [];
+
+    constructor(private carsSvc: Cars, private http: Http) { }
+
+    public ngOnInit() {
+
+        this.carsSvc.refresh().subscribe((cars) => {
+            this.cars = cars;
+        });
+
+
+        // const myObservable = Observable
+        //     .create((observer: Observer<number>) => {
+
+        //         let counter = 0;
+
+        //         setInterval(() => {
+        //             observer.next(counter++);
+        //         }, 500);
+
+        //     });
+
+        // myObservable
+        //     // .map((x: number) => x ** 2)
+        //     .subscribe((result: number) => {
+        //         console.log(result);
+        //     });
+
+    }
+
+}

@@ -1,42 +1,34 @@
 import { Component } from "@angular/core";
-import { Http, RequestOptions, Headers } from "@angular/http";
-
-import { Car } from "../car-tool-app/interfaces/car";
-import { Cars } from "./services/cars.service";
 
 @Component({
     selector: "main",
     template: `
-        <ul>
-            <li *ngFor="let car of cars">
-                {{car.make}}
-            </li>
-        </ul>
+        <form novalidate>
+            <div>
+                <label for="first-name-input">First Name:</label>
+                <input type="text" id="first-name-input"
+                    name="firstNameInput" [(ngModel)]="firstName"
+                    required #firstNameInputRef="ngModel">
+                <span *ngIf="firstNameInputRef.invalid && firstNameInputRef.touched">
+                    First Name is required.
+                </span>
+                <br>Value: {{firstName}},
+                    {{firstNameInputRef.invalid ? 'invalid' : 'valid'}}
+            </div>
+            <div>
+                <label for="last-name-input">Last Name:</label>
+                <input type="text" id="last-name-input"
+                    name="lastNameInput" [(ngModel)]="lastName"
+                    required>
+                <br>Value: {{lastName}}
+            </div>
+        </form>
     `,
+    styles: [
+        "input.ng-invalid.ng-touched { border: red 1px solid; }",
+    ],
 })
 export class AppComponent {
 
-    private cars: Car[] = [];
-
-    constructor(private carsSvc: Cars, private http: Http) {
-
-        const requestOptions = new RequestOptions({
-            headers: new Headers({
-                "Content-Type": "application/json",
-            }),
-        });
-
-        this.http.post("http://localhost:3010/cars", JSON.stringify({
-            make: "Toyota", model: "Yaris", color: "blue", year: 1990, price: 10000,
-        }), requestOptions).toPromise().then((res) => res.json())
-            .then(() => this.carsSvc.refresh())
-            .then((results) => {
-                this.cars = this.carsSvc.getAll();
-                console.log(results)
-            });
-
-
-
-    }
-
+    public firstName: string = "";
 }
